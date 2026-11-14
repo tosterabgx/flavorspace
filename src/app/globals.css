@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --color-ink: #1a1a18;
+  --color-muted: #5f5e58;
+  --color-tomato: #c8402a;
+  --color-mustard: #f3c24b;
+  --color-leaf: #2f6b4f;
+  --color-surface: #f3f2ee;
+}
