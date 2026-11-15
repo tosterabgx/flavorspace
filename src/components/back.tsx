@@ -4,7 +4,7 @@ export default function Back({ href, className }: { href: string; className?: st
   return (
     <Link
       href={href}
-      className={`flex size-11 items-center justify-center rounded-full bg-white text-ink ${className}`}
+      className={`flex size-11 items-center justify-center rounded-full bg-white text-ink ${className ?? ""}`}
     >
       <svg
         aria-hidden="true"

@@ -25,8 +25,7 @@ const tabs = [
   },
 ];
 
-function Tab({ href, label, d }: (typeof tabs)[number]) {
-  const active = usePathname() === href;
+function Tab({ href, label, d, active }: (typeof tabs)[number] & { active: boolean }) {
   return (
     <Link
       href={href}
@@ -50,11 +49,11 @@ function Tab({ href, label, d }: (typeof tabs)[number]) {
   );
 }
 
-export default function TabBar() {
+export default function TabBar({ pathname }: { pathname?: string }) {
   return (
     <nav className="fixed inset-x-0 bottom-0 mx-auto flex h-21 max-w-md items-start justify-around border-t border-surface bg-white pt-2.5">
-      <Tab {...tabs[0]} />
-      <Tab {...tabs[1]} />
+      <Tab {...tabs[0]} active={pathname === tabs[0].href} />
+      <Tab {...tabs[1]} active={pathname === tabs[1].href} />
       <Link
         href="/log"
         className="-mt-1.5 flex size-13 items-center justify-center rounded-full bg-tomato text-white"
@@ -72,8 +71,12 @@ export default function TabBar() {
           <path d="M12 5v14M5 12h14" />
         </svg>
       </Link>
-      <Tab {...tabs[2]} />
-      <Tab {...tabs[3]} />
+      <Tab {...tabs[2]} active={pathname === tabs[2].href} />
+      <Tab {...tabs[3]} active={pathname === tabs[3].href} />
     </nav>
   );
+}
+
+export function ActiveTabBar() {
+  return <TabBar pathname={usePathname()} />;
 }
