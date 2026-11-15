@@ -96,7 +96,7 @@ async function HomeContent() {
 
       {active ? (
         <Link
-          href={`/challenges/${active.slug}`}
+          href={`/challenges`}
           className="flex flex-col gap-1.5 rounded-3xl bg-ink p-5 text-white"
         >
           <div className="flex items-center justify-between text-xs">
