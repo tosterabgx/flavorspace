@@ -72,3 +72,21 @@ export const challengeMembers = pgTable(
   },
   (t) => [primaryKey({ columns: [t.userId, t.challengeId] }), index().on(t.challengeId)],
 );
+
+export const cookLogs = pgTable(
+  "cook_logs",
+  {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    userId: uuid()
+      .notNull()
+      .references(() => profiles.id, { onDelete: "cascade" }),
+    recipeId: integer()
+      .notNull()
+      .references(() => recipes.id, { onDelete: "cascade" }),
+    photoPath: text(),
+    note: text(),
+    isShared: boolean().notNull().default(true),
+    createdAt: createdAt(),
+  },
+  (t) => [index().on(t.userId, t.createdAt)],
+);
