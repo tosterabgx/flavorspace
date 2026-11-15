@@ -11,7 +11,7 @@ export default async function RecipePage(props: PageProps<"/recipe/[name]">) {
   ];
 
   return (
-    <main>
+    <div>
       <header className="relative h-72 w-full">
         <Image src="/recipe.svg" alt={`Photo of ${name}`} fill className="object-cover" />
         <Back href="/" className="absolute top-5 left-5" />
@@ -37,6 +37,6 @@ export default async function RecipePage(props: PageProps<"/recipe/[name]">) {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }

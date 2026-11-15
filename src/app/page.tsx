@@ -1,19 +1,25 @@
-"use client";
-
 import Logo from "@/components/logo";
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Home() {
-  const [recipe, setRecipe] = useState("Shakshuka");
-
   return (
-    <main>
-      <Logo />
+    <div className="flex flex-col gap-6 p-5">
+      <header className="mt-2 flex items-center justify-between">
+        <Logo />
 
-      <input type="text" value={recipe} onChange={(e) => setRecipe(e.target.value)} />
-      <br />
-      <Link href={`/recipe/${recipe}`}>{recipe}</Link>
-    </main>
+        <Link
+          href="/profile"
+          className="flex size-11 items-center justify-center rounded-full bg-mustard font-display font-bold"
+        >
+          A
+        </Link>
+      </header>
+
+      <main>
+        <p>
+          <span>14</span> dishes cooked so far
+        </p>
+      </main>
+    </div>
   );
 }
