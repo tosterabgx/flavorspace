@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "oxlint && next build",
     "start": "next start",
-    "lint": "oxlint",
-    "db:push": "drizzle-kit push",
-    "db:seed": "tsx src/db/seed.ts"
+    "lint": "oxlint"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
