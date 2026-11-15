@@ -6,7 +6,8 @@ import Image from "next/image";
 import { eq } from "drizzle-orm";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import MadeItButton from "@/components/made-it-button";
+import { madeIt } from "./actions";
 
 async function getRecipe(slug: string) {
   "use cache";
@@ -37,7 +38,14 @@ async function Recipe({ params }: { params: Promise<{ slug: string }> }) {
   return (
     <div>
       <header className="relative h-72 w-full">
-        <Image src="/recipe.svg" alt={`Photo of ${recipe.name}`} fill className="object-cover" />
+        <Image
+          src="/recipe.svg"
+          alt={`Photo of ${recipe.name}`}
+          fill
+          priority
+          loading="eager"
+          className="object-cover"
+        />
         <Back href="/" className="absolute top-5 left-5" />
       </header>
 
@@ -84,12 +92,9 @@ async function Recipe({ params }: { params: Promise<{ slug: string }> }) {
           </ol>
         </div>
 
-        <Link
-          href={`/log?recipe=${recipe.slug}`}
-          className="flex h-12 items-center justify-center rounded-xl bg-tomato font-semibold text-white"
-        >
-          I made it
-        </Link>
+        <form action={madeIt.bind(null, recipe.id)}>
+          <MadeItButton />
+        </form>
       </section>
     </div>
   );

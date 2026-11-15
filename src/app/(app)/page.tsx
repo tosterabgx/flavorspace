@@ -1,3 +1,4 @@
+import Confetti from "@/components/confetti";
 import Logo from "@/components/logo";
 import { challengeMembers, challenges, cookLogs, dishes, profiles, recipes } from "@/db/schema";
 import { db } from "@/index";
@@ -9,6 +10,10 @@ import { Suspense } from "react";
 export default function Home() {
   return (
     <div className="flex flex-col gap-6 p-5">
+      <Suspense fallback={null}>
+        <Confetti />
+      </Suspense>
+
       <Suspense fallback={<div className="h-96 animate-pulse rounded-3xl bg-surface" />}>
         <HomeContent />
       </Suspense>
