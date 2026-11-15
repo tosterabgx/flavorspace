@@ -20,7 +20,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
-      <body className="min-h-dvh bg-white font-sans text-ink antialiased">{children}</body>
+      <body className="min-h-dvh bg-white font-sans text-ink antialiased">
+        <div className="mx-auto max-w-md">{children}</div>
+      </body>
     </html>
   );
 }
