@@ -14,7 +14,7 @@ You can sign up (it doesn't require entering code from email) or use this accoun
 tester@example.com
 qwerty
 ```
-
+Once you get into the main menu, you can browse challenges. There is only one for now, so join it. From that menu, you can go to the dishes from this challenge and complete them!
 
 ## Features
 
