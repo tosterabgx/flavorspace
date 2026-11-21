@@ -5,6 +5,7 @@ import { db } from "@/index";
 import { createClient } from "@/lib/server";
 import { eq, count, isNull, and, desc, gte, sql, countDistinct } from "drizzle-orm";
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 
 export default function Home() {
@@ -60,7 +61,12 @@ async function HomeContent() {
           .where(and(eq(cookLogs.userId, user.id), eq(dishes.challengeId, active.id)))
       : [{ n: 0 }],
     db
-      .select({ id: cookLogs.id, name: recipes.name, slug: recipes.slug })
+      .select({
+        id: cookLogs.id,
+        name: recipes.name,
+        slug: recipes.slug,
+        imageUrl: recipes.imageUrl,
+      })
       .from(cookLogs)
       .innerJoin(recipes, eq(recipes.id, cookLogs.recipeId))
       .where(eq(cookLogs.userId, user.id))
@@ -83,16 +89,18 @@ async function HomeContent() {
         </Link>
       </header>
 
-      <p className="flex items-baseline gap-2.5">
-        <span className="font-display text-6xl leading-none font-bold tracking-tighter">
-          {total.n}
-        </span>
-        <span className="text-[15px] leading-snug text-muted">
-          dishes cooked so far
-          <br />
-          {week.n} this week
-        </span>
-      </p>
+      {total.n != 0 && (
+        <p className="flex items-baseline gap-2.5">
+          <span className="font-display text-5xl leading-none font-bold tracking-tighter">
+            {total.n}
+          </span>
+          <span className="text-lg leading-snug text-muted">
+            dishes cooked so far
+            <br />
+            {week.n != 0 && <>{week.n} this week</>}
+          </span>
+        </p>
+      )}
 
       {active ? (
         <Link
@@ -114,35 +122,35 @@ async function HomeContent() {
       ) : (
         <Link href="/challenges" className="flex flex-col gap-2 rounded-3xl bg-surface p-5">
           <h2 className="font-display text-2xl font-bold">Pick your first challenge</h2>
-          <p className="text-sm text-muted">Cook through it one dish at a time</p>
           <span className="mt-2 self-start rounded-xl bg-tomato px-4 py-3 text-sm font-semibold text-white">
-            Browse challenges
+            Browse
           </span>
         </Link>
       )}
 
-      <section className="flex flex-col gap-3">
-        <h2 className="font-display text-xl font-bold">Recently cooked</h2>
-        <ul className="grid grid-cols-3 gap-2.5">
-          {recent.length == 0 ? (
-            <li key={-1}>
-              <div className="flex flex-col gap-1.5">
-                <div className="aspect-square rounded-2xl bg-surface" />
-                <span className="text-[13px] font-medium">Nothing for now!</span>
-              </div>
-            </li>
-          ) : (
-            recent.map((r) => (
+      {recent.length != 0 && (
+        <section className="flex flex-col gap-3">
+          <h2 className="font-display text-xl font-bold">Recently cooked</h2>
+          <ul className="grid grid-cols-3 gap-2.5">
+            {recent.map((r) => (
               <li key={r.id}>
                 <Link href={`/recipe/${r.slug}`} className="flex flex-col gap-1.5">
-                  <div className="aspect-square rounded-2xl bg-surface" />
+                  <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface">
+                    <Image
+                      src={r.imageUrl ?? "/recipe.svg"}
+                      alt=""
+                      fill
+                      sizes="120px"
+                      className="object-cover"
+                    />
+                  </div>
                   <span className="text-[13px] font-medium">{r.name}</span>
                 </Link>
               </li>
-            ))
-          )}
-        </ul>
-      </section>
+            ))}
+          </ul>
+        </section>
+      )}
     </>
   );
 }

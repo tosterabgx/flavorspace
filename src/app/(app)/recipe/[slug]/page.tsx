@@ -39,7 +39,7 @@ async function Recipe({ params }: { params: Promise<{ slug: string }> }) {
     <div>
       <header className="relative h-72 w-full">
         <Image
-          src="/recipe.svg"
+          src={recipe.imageUrl ?? "/recipe.svg"}
           alt={`Photo of ${recipe.name}`}
           fill
           priority
