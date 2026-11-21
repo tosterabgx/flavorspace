@@ -29,3 +29,6 @@ Once you get into the main menu, you can browse challenges. There is only one fo
 - Tailwind CSS
 - Drizzle ORM
 - Supabase
+
+
+<img width="440" height="922" alt="image" src="https://github.com/user-attachments/assets/d58737ef-1b83-4a1c-ab94-d78183c29945" />
